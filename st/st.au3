@@ -13,10 +13,10 @@ $i5 = GUICtrlCreateInput("", 400, 25, 73, 21)
 $i6 = GUICtrlCreateInput("", 489, 25, 73, 21)
 $l1 = GUICtrlCreateLabel("Karty w talii", 16, 8, 57, 17)
 $l2 = GUICtrlCreateLabel("Karty na grave", 103, 8, 73, 17)
-$l3 = GUICtrlCreateLabel("Karty na rêce", 193, 8, 67, 17)
-$l4 = GUICtrlCreateLabel("ST na rêce i grave", 279, 8, 92, 17)
-$l5 = GUICtrlCreateLabel("ST ogólnie", 400, 8, 55, 17)
-$l6 = GUICtrlCreateLabel("Ilosæ tarcz", 489, 8, 55, 17)
+$l3 = GUICtrlCreateLabel("Karty na rece", 193, 8, 67, 17)
+$l4 = GUICtrlCreateLabel("ST na rece i grave", 279, 8, 92, 17)
+$l5 = GUICtrlCreateLabel("ST ogolnie", 400, 8, 55, 17)
+$l6 = GUICtrlCreateLabel("Ilosc tarcz", 489, 8, 55, 17)
 $btn = GUICtrlCreateButton("Przelicz", 24, 56, 449, 33)
 GUISetState(@SW_SHOW)
 #EndRegion ### END Koda GUI section ###
@@ -40,7 +40,7 @@ While $msg <> $GUI_EVENT_CLOSE
 		 $1s = $a / $b
 		 $return = $1s * $sn
 
-		 MsgBox (0, "Wynik", "Prawdopodobieñstwo ST pod twoimi tarczami wynosi: " & $return)
+		 MsgBox (0, "Wynik", "Prawdopodobienstwo ST pod twoimi tarczami wynosi: " & $return)
 	Exit
 	EndIf
 WEnd
