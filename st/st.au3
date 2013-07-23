@@ -1,3 +1,12 @@
+;Name 			ST.exe
+;Authors	 	Coestar and MrHudson
+;Version		1.0b
+;Cmp date		10.07.13
+;1st cmp date		10.07.13
+;
+;Creative Commons - Attribution - Share-Alike (CC-BY-SA) duelmasters.com.pl 2013
+;All rights reserved.
+
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
 #include <GUIConstantsEx.au3>
