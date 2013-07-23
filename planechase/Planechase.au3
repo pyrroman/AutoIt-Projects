@@ -5,7 +5,7 @@
 ;1st cmp date	10.07.13
 ;
 ;Creative Commons - Attribution - Share-Alike (CC-BY-SA) duelmasters.com.pl 2013
-;All rights reserved.
+;Some rights reserved.
 
 #include <ButtonConstants.au3>
 #include <GUIConstantsEx.au3>
