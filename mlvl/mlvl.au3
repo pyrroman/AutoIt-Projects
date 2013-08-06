@@ -10,7 +10,7 @@ HotKeySet("{NUMPAD0}", "stopMacro")					; stops the macro
 
 $foodVariable = 0									; don't change this
 $manaPotionVariable = 0								; and this
-$i = 0												; and this too
+$i = 0												; neither this
 
 ;USER VARIABLES:
 $foodManaRegen = 23									; how much mana is regenerated per tick (2s), should be constant, but if not, lowest possible
