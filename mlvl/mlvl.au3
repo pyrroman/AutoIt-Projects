@@ -1,4 +1,4 @@
-; Magic Level Macro Alpha by MrHudson (IGN: Five Star)
+; Magic Level Beta by MrHudson (IGN: Five Star)
 ; Kovloria OTS, kovloria.pl
 ; First cmp date: Aug 6th, 2013
 
