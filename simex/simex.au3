@@ -1,4 +1,4 @@
-; ####################################################
+; ###################################################
 ; This stuff counts simultaneous equations.
 ; First you have to make it as such:
 ; { ax + by + c
