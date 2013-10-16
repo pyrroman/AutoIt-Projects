@@ -57,10 +57,10 @@ func main()
 	if $a*$q-$p*$b <> 0 AND $b*$p-$q*$a <> 0 Then ;IF THERE'S AN UNIQUE SOLUTION
 		$x = ($c*$q-$z*$b) / ($a*$q-$p*$b)
 		$y = ($c*$p-$z*$a) / ($b*$p-$q*$a)
-		MsgBox(0, "Solution", "UNIQUE SOLUTION! |   x = " & $x & "|   y = " & $y)
+		MsgBox(0, "Solution", "UNIQUE SOLUTION!" & @CRLF & " |   x = " & $x & @CRLF & " |   y = " & $y)
 	elseif $a*$q-$p*$b == 0 AND $b*$p-$q*$a == 0 AND $c*$q-$z*$b == 0 AND $c*$p-$z*$a == 0 then ;IF THERE'S INFINITELY MANY SOLUTIONS
 		MsgBox(0, "Solution", "INFINITELY MANY SOLUTIONS! - You've reached end of the world, it's best to turn back now.")
-	elseif $a*$q-$p*$b <> 0 AND $b*$p-$q*$a <> 0 AND $c*$q-$z*$b <> 0 AND $c*$p-$z*$a <> 0 then ;IF THERE'S NO SOLUTIONS
+	else ;IF THERE'S NO SOLUTIONS
 		MsgBox(0, "Solution", "NO SOLUTIONS - Try again later.")
 	endif
 EndFunc
