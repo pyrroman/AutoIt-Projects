@@ -18,7 +18,7 @@
 global $input[4]
 global $read[4]
 
-;GUI START @@@@@@@@@@@@@@@@@@@@@@@@
+;GUI START @@@@@@@@@@@@@@@@@@@@@@@@@
 $Form1 = GUICreate("Acrux", 197, 152, 192, 124)
 $btn = GUICtrlCreateButton("FIRE LAZERS!", 8, 104, 177, 41)
 $Label1 = GUICtrlCreateLabel("-", 88, 8, 14, 39)
@@ -31,7 +31,7 @@ $input[1] = GUICtrlCreateInput("", 105, 16, 73, 21)
 $input[2] = GUICtrlCreateInput("", 8, 49, 73, 21)
 $input[3] = GUICtrlCreateInput("", 105, 49, 73, 21)
 GUISetState(@SW_SHOW)
-;GUI END @@@@@@@@@@@@@@@@@@@@@@@@@
+;GUI END @@@@@@@@@@@@@@@@@@@@@@@@@@
 
 $msg = 0
 while $msg <> $GUI_EVENT_CLOSE
