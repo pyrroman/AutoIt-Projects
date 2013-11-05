@@ -61,5 +61,8 @@ EndFunc
 func read()
 	for $i = 0 to 3 step +1
 		$read[$i] = GUICtrlRead($input[$i])
+		if $read[$i] == "x" Then
+			return $i
+		EndIf
 	Next
 EndFunc
