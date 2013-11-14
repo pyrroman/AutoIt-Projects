@@ -8,6 +8,8 @@
 
 #ce ----------------------------------------------------------------------------
 
+#NoTrayIcon
+
 #include <ButtonConstants.au3>
 #include <EditConstants.au3>
 #include <GUIConstantsEx.au3>
@@ -46,10 +48,12 @@ AdlibRegister("Timer", 1000)
 #Region ### START Koda GUI section ### Form=
 $form = GUICreate("Alcyone v1 by MrHudson", 999, 615, 351, 233)
 $img = GUICtrlCreatePic($IMGPATH, 8, 8, 729, 81)
-$timer = GUICtrlCreateLabel("MM:SS", 816, 24, 107, 41)
+$timer = GUICtrlCreateLabel("MM:SS", 816, 8, 107, 41)
 GUICtrlSetFont(-1, 24, 400, 0, "MS Sans Serif")
-$btn[0] = GUICtrlCreateButton("WYŒLIJ", 8, 528, 337, 73)
-$btn[1] = GUICtrlCreateButton("WYCZYŒÆ", 352, 528, 337, 73)
+$nsinput = GUICtrlCreateInput("", 752, 64, 233, 21)
+$nslabel = GUICtrlCreateLabel("Imie i nazwisko:", 752, 48, 150, 16)
+$btn[0] = GUICtrlCreateButton("WYSLIJ", 8, 528, 337, 73)
+$btn[1] = GUICtrlCreateButton("WYCZYSC", 352, 528, 337, 73)
 $btn[2] = GUICtrlCreateButton("Pytania", 696, 528, 289, 73)
 
 GenerateEdit(0, 4)
@@ -109,8 +113,10 @@ func Save()
 	if $blocker == 0 Then
 		for $i = 0 to 29 step +1
 			$editread[$i] = GuiCtrlRead($edithandle[$i])
+			$nsread = GuiCtrlRead($nsinput)
 		Next
 		local $logHandle = FileOpen($LOGPATH, 1)
+		FileWrite($logHandle, @CRLF & $nsread & @CRLF)
 		for $i = 0 to 29 step +1
 			FileWrite($logHandle, $i+1 & ") " & $editread[$i] & @CRLF)
 		Next
@@ -118,11 +124,11 @@ func Save()
 		FileClose($logHandle)
 		$blocker = 1
 	elseif $blocker = 1 Then
-		MsgBox(0, "B³¹d!", "Nie mozesz wys³aæ testu kilka razy.")
+		MsgBox(0, "B31d!", "Nie mozesz wyslac testu kilka razy.")
 	elseif $blocker = 2 Then
-		MsgBox(0, "B³¹d!", "Po czasie!")
+		MsgBox(0, "B31d!", "Po czasie!")
 	Else
-		MsgBox(0, "B³¹d!", "404")
+		MsgBox(0, "B31d!", "404")
 	EndIf
 endfunc
 
@@ -139,7 +145,9 @@ func Timer()
 	if $sec == 0 and $min == 0 Then
 		Save()
 		$blocker = 2
-		MsgBox(0, "Koniec czasu!", "Wyniki twojej pracy zosta³y zapisane.")
+		MsgBox(0, "Koniec czasu!", "Wyniki twojej pracy zostaly zapisane.")
 	EndIf
-	GUiCtrlSetData($timer, $min & ";" & $sec)
+	if $blocker <> 2 Then
+		GUiCtrlSetData($timer, $min & ";" & $sec)
+	EndIf
 EndFunc
