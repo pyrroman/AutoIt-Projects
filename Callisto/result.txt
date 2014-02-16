@@ -1,0 +1,8 @@
+[table]
+[tr][td][b]#[/b][/td][td][b]Name[/b][/td][td][b]Remarks[/b][/td][td][b]Civ[/b][/td][/tr]
+[tr][td]4[/td][td][d]Aquan[/d][/td][td][i]Because this is a hybrid deck and because it's UY, Aquan is a staple in here. [/i][/td][td][color=#1E90FF][b]U[/b][/color][/td][/tr]
+[tr][td]2[/td][td][d]Aqua Jet[/d][/td][td][i]Gives draw for hunters. Originally, the numbers were swapped with Aquan, but in the late-game it gave too many cards and I milled myself.[/i][/td][td][color=#1E90FF][b]U[/b][/color][/td][/tr]
+[tr][td]2[/td][td][d]Crystal Memory[/d][/td][td][i] Good card that allows me to search for something I need right now. [/i][/td][td][color=#1E90FF][b]U[/b][/color][/td][/tr]
+[tr][td][b]8[/b][/td][td][b]TOTAL[/b][/td][td][/td][td][/td][/tr]
+[/table]
+[size=x-small]Generated with [url=http://duelmasters.com.pl/topic-Callisto-Deck-Builder]Callisto[/url][/size]
