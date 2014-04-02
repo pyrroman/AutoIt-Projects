@@ -8,11 +8,19 @@
 #include <GUIListView.au3>
 #include <File.au3>
 #include <array.au3>
-;===================== VARIABLES =======================================================================================================================================================================
-Global $cardArray[50][4] ;0 -> number, 1-> civ, 2->name, 3-> remarks
-Global $listArray[50][4]
-
+#include "ArrayMultiColSort.au3"
+;===================== VARIABLES | ARRAYS ==============================================================================================================================================================
 Global $arrayIndex = 0
+Global $r = 1
+Global $firstUse = False
+
+Global $cardArray[$r][4] ;0 -> number, 1-> civ, 2->name, 3-> remarks
+Global $listArray[$r][4]
+;===================== SORTING TEMPLATE ================================================================================================================================================================
+Global $sortingTemplate[3][2] = [ _
+        [1, 0], _
+        [0, 1], _
+        [2, 0]]
 ;===================== GUI START =======================================================================================================================================================================
 $stdForm = GUICreate("Callisto Deck Builder by Coestar | duelmasters.com.pl", 623, 309, 601, 257)
 
@@ -59,7 +67,14 @@ Func advanced()
 	MsgBox(0, "Error", "Will be implemented soon (tm).")
 EndFunc
 
+Func debug()
+	sortBoth()
+	_ArrayDisplay($cardArray)
+EndFunc
+
 Func generate()
+	sortBoth()
+
 	Dim $total = 0
 
 	$iRem = MsgBox(4, "Remarks", "Do you want to enable remarks? (If you select ''No'', the Remarks column will be ignored entirely).")
@@ -106,7 +121,7 @@ Func generate()
 		FileWrite($hFile, $string & @CRLF)
 	Next
 
-	For $i = 0 To $arrayIndex Step +1
+	For $i = 0 To $arrayIndex-1 Step +1
 		$total += $cardArray[$i][0]
 	Next
 
@@ -126,6 +141,11 @@ Func generate()
 EndFunc
 
 Func add()
+	If $firstUse == False Then
+		$firstUse = True
+	Else
+		enlargeArrays()
+	EndIf
 	addToList()
 	$arrayIndex += 1
 	clearInput($remInput)
@@ -133,11 +153,32 @@ Func add()
 EndFunc
 
 Func del()
-	Local $index
-	$index = InputBox("Note", "Which item do you want to delete?")
-	_GUICtrlListView_DeleteItem(GUICtrlGetHandle($deckList), $index-1)
-	_ArrayDelete($cardArray, $index-1)
-	$arrayIndex-=1
+	If UBound($cardArray, 1) == 1 Then
+		MsgBox(0, "Error", "You can't delete the last item! You need to add at least one more.")
+	Else
+		Local $index
+		$index = InputBox("Note", "Which item do you want to delete?")
+		If UBound($cardArray, 1) < $index Then
+			MsgBox(0, "Error", "There's no such item!")
+		Else
+			_GUICtrlListView_DeleteItem(GUICtrlGetHandle($deckList), $index-1)
+			_ArrayDelete($cardArray, $index-1)
+			$arrayIndex-=1
+			shrinkArrays()
+		EndIf
+	EndIf
+EndFunc
+
+Func enlargeArrays()
+	$r+=1
+	ReDim $listArray[$r][4]
+	ReDim $cardArray[$r][4]
+EndFunc
+
+Func shrinkArrays()
+	$r-=1
+	ReDim $listArray[$r][4]
+	ReDim $cardArray[$r][4]
 EndFunc
 
 Func readInputs()
@@ -160,9 +201,9 @@ Func clearInput($hCtrl)
 	GUICtrlSetData($hCtrl, "")
 EndFunc
 
-
-
-
+Func sortBoth()
+	_ArrayMultiColSort($cardArray, $sortingTemplate)
+EndFunc
 
 
 
