@@ -39,7 +39,7 @@ GUICtrlSetData($civCombo, "Nature|Fire|Light|Darkness|Water|Rainbow|Zero", "Sele
 $addButton = GUICtrlCreateButton("Add card...", 10, 220, 101, 41)
 $delButton = GUICtrlCreateButton("Delete card...", 120, 220, 101, 41)
 $generateButton = GUICtrlCreateButton("Generate BBCode", 10, 260, 211, 21)
-$advButton = GUICtrlCreateButton("Switch to advanced...", 10, 280, 211, 21)
+$hzButton = GUICtrlCreateButton("Hyperspatial Zone", 10, 280, 211, 21)
 
 $deckGroup = GUICtrlCreateGroup("Deck", 240, 10, 371, 291)
 
@@ -48,12 +48,11 @@ $deckList = GUICtrlCreateListView("# | C | Name | Remarks", 250, 30, 351, 261)
 GUISetState(@SW_SHOW)
 ;===================== GUI END =========================================================================================================================================================================
 While 1
-	$nMsg = GUIGetMsg()
-	Switch $nMsg
+	Switch GUIGetMsg()
 		Case $GUI_EVENT_CLOSE
 			Exit
-		Case $advButton
-			advanced()
+		Case $hzButton
+			hz()
 		Case $generateButton
 			generate()
 		Case $addButton
@@ -63,10 +62,6 @@ While 1
 	EndSwitch
 WEnd
 ;=======================================================================================================================================================================================================
-Func advanced()
-	MsgBox(0, "Error", "Will be implemented soon (tm).")
-EndFunc
-
 Func debug()
 	sortBoth()
 	_ArrayDisplay($cardArray)
@@ -205,9 +200,90 @@ Func sortBoth()
 	_ArrayMultiColSort($cardArray, $sortingTemplate)
 EndFunc
 
+Func hz()
+	$flag = MsgBox(4, "Note", "Remember to generate your code now or it will be overwritten later. Have you done that?")
+	If $flag == 6 Then
+		GUISetState(@SW_DISABLE, $stdForm)
+		hzGui()
+		GUISetState(@SW_ENABLE, $stdForm)
+	EndIf
+EndFunc
 
+;=======================================================================================================================================================================================================
 
+Func hzGui()
+	Global $temporalInputArray[8]
+	Global $awakenedInputArray[8]
 
+	Global $temporalArray[8]
+	Global $awakenedArray[8]
+
+	Dim $top=30
+
+	$hzForm = GUICreate("Callisto Deck Builder by Coestar | Hyperspatial Zone | duelmasters.com.pl", 510, 341, 599, 255)
+
+	$groupTemporal = GUICtrlCreateGroup("Temporal Side", 10, 10, 241, 261)
+	For $i=0 To 7 Step +1
+		$temporalInputArray[$i] = GUICtrlCreateInput("", 20, $top, 221, 21)
+		$top+=30
+	Next
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+	$top = 30
+
+	$groupAwakened = GUICtrlCreateGroup("Awakened Side", 260, 10, 241, 261)
+	For $i=0 To 7 Step +1
+		$awakenedInputArray[$i] = GUICtrlCreateInput("", 270, $top, 221, 21)
+		$top+=30
+	Next
+	GUICtrlCreateGroup("", -99, -99, 1, 1)
+
+	$appendButton = GUICtrlCreateButton("Append code.", 10, 280, 491, 51)
+	GUISetState(@SW_SHOW)
+
+	While 1
+		Switch GUIGetMsg()
+			Case $GUI_EVENT_CLOSE
+				GUIDelete($hzForm)
+				ExitLoop
+			Case $appendButton
+				append()
+				GUIDelete($hzForm)
+				ExitLoop
+		EndSwitch
+	WEnd
+EndFunc
+
+Func append()
+	$flag = MsgBox(4, "Note", "Are you sure? This is one-take operation. If something goes wrong, you'll need to re-create the file.")
+	If $flag == 6 Then
+		hzRead()
+		$hFile = FileOpen(@ScriptDir & "\result.txt", 1)
+
+		FileWrite($hFile, @CRLF & @CRLF & @CRLF)
+		FileWrite($hFile, "[table]" & @CRLF)
+		FileWrite($hFile, "[tr][td][b][u]Hyperspatial Zone:[/u][/b][/td][td][/td][/tr]" & @CRLF)
+
+		For $i=0 To 7 Step +1
+			If $temporalArray[$i] <> "" Or $awakenedArray[$i] <> "" Then
+				FileWrite($hFile, "[tr][td][d]" & $temporalArray[$i] & "[/d][/td][td][d]" & $awakenedArray[$i] & "[/d][/td][/tr]" & @CRLF)
+			Else
+				ExitLoop
+			EndIf
+		Next
+
+		FileWrite($hFile, "[/table]")
+
+		MsgBox(0, "Note", "Code appended.")
+	EndIf
+EndFunc
+
+Func hzRead()
+	For $i=0 To 7 Step +1
+		 $temporalArray[$i] = GUICtrlRead($temporalInputArray[$i])
+		$awakenedArray[$i] = GUICtrlRead($awakenedInputArray[$i])
+	Next
+EndFunc
 
 
 
